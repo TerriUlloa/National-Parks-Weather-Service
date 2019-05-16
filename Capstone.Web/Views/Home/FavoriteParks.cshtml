@@ -1,0 +1,32 @@
+﻿@model IList<FavoriteParks>
+@{
+    ViewData["Title"] = "FavoriteParks";
+}
+@section StyleSheet{
+    <link href="~/css/survey.css" rel="stylesheet" />
+}
+
+<h2>Favorite Parks</h2>
+
+
+<div class="fav-parks">
+    @foreach (var item in Model)
+    {
+        if (item.NumberOfSurveys > 0)
+        {
+        <div>
+            <img src="~/images/parks/@(item.ParkCode).jpg" />
+        </div>
+        <div>
+            <div>
+                <h4>@item.ParkName</h4>
+            </div>
+        </div>
+        <div> 
+            <p>Survey takers: @item.NumberOfSurveys</p> 
+        </div>
+        }
+
+    }
+</div>
+

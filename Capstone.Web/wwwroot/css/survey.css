@@ -1,0 +1,65 @@
+﻿.field-validation-error {
+    color: #ED4337;
+    font-weight: bold;
+}
+img {
+    border-radius: 2%;
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.survey-input {
+    margin-bottom: 20px;
+    display: flex;
+    width:50%
+}
+#survey-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+}
+#survey-button {
+    width: 80px;
+    margin-left: 20%;
+    border-radius: 80%;
+}
+
+.grid-area-2 div{
+    display:flex;
+    flex-direction:row;
+}
+.grid-area-2 span {
+    padding-left: 20px;
+}
+#survey-radio span {
+    padding-left: 0px;
+}
+
+.fav-parks div img{
+    width: 90%;
+}
+
+.fav-parks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-row-gap: 10px;
+
+}
+.fav-parks h4, p {
+    margin: 0;
+
+}
+
+.fav-parks div {
+    margin-top: auto;
+    margin-bottom: auto;
+
+}

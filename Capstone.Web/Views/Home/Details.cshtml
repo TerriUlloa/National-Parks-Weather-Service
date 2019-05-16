@@ -1,0 +1,84 @@
+﻿@model Park
+
+@{
+    ViewData["Title"] = "Details";
+}
+@section StyleSheet{ 
+    <link href="~/css/DetailsCss.css" rel="stylesheet" />
+}
+<div class="park-picture">
+    <div>
+    <img id="detail-image" src="~/images/parks/@(Model.ParkCode + ".jpg")" />
+   </div>
+    <div class="park-description">
+        <h2>
+            @Model.ParkName
+            (@Model.ParkCode)
+        </h2>
+        <h4>
+            @Model.State
+            Founded in @Model.YearFounded
+        </h4>
+        <i>"@Model.InspirationalQuote"</i>
+        <p><strong>- @Model.InspirationalQuoteSource</strong></p>
+        <br />
+        <p>@Model.ParkDescription</p>
+    </div>
+</div>
+    <section class="detail-content">
+        <div>
+                <div class="forecast-grid">
+        @foreach (var item in Model.Weather)
+        {
+            @if (item.FiveDayForecastValue == 1)
+            {
+            <div class="today-forecast">
+                <h4>Today</h4>
+                <img id="today-forecast" src="~/images/weather/@(item.Forecast.Replace(" ",string.Empty)).png" />
+                <h5>High <span class="temp-border">@item.CalculateCelsius(item.High, Model.TemperatureType)</span> Low <span class="temp-border">@item.CalculateCelsius(item.Low, Model.TemperatureType)</span></h5>
+                <p>@item.ForecastDerived</p>
+                <p>@item.TemperatureDerived</p>
+                 <form asp-controller="Home" asp-action="DetailsToggleTemp" method="get">
+                     <div>
+                         <p id="temp-selector">&deg;F</p>
+                         <input type="hidden" value="@Model.ParkCode" name="parkCode" />   <label class="switch">
+                             @if (Model.TemperatureType.Equals("Celsius"))
+                             {<input type="checkbox" onChange="this.form.submit()" checked> }
+                             else
+                             {<input type="checkbox" onChange="this.form.submit()">}
+                             <span class="slider round"></span>
+                         </label>
+                         <p id="temp-selector">&deg;C</p>
+                     </div> 
+                </form>
+            </div>
+            }
+            else
+            {
+            <div class="future-forecast">
+                <div>
+                    <img id="future-forecast" src="~/images/weather/@(item.Forecast.Replace(" ",string.Empty)).png" />
+                    <p>@DateTime.Today.AddDays(item.FiveDayForecastValue - 1).DayOfWeek</p>
+                    <h5>High <span class="temp-border">@item.CalculateCelsius(item.High, Model.TemperatureType)</span></h5>
+                    <h5>Low <span class="temp-border">@item.CalculateCelsius(item.Low, Model.TemperatureType)</span></h5>
+                </div>
+            </div>
+            }
+        }
+    </div>
+ 
+        </div>
+        <div>
+            <h4>Park Details</h4>
+            <ul>
+                <li>Acerage: @Model.Acreage.ToString("N0") acres</li>
+                <li>Annual Visitor Count: @Model.AnnualVisitorCount.ToString("N0")</li>
+                <li>Climate: @Model.Climate</li>
+                <li>Elevation: @Model.ElevationInFeet.ToString("N0") feet</li>
+                <li>Entry Fee: @Model.EntryFeeDerived</li>
+                <li>Miles of Trail: @Model.MilesOfTrail.ToString("N0") miles</li>
+                <li>Number of Animal Species: @Model.NumberOfAnimalSpecies</li>
+                <li>Number of Campsites: @Model.NumberOfCampsitesDerived</li>
+            </ul>
+        </div>
+    </section>

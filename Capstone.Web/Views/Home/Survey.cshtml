@@ -1,0 +1,50 @@
+﻿@model DailySurvey
+@{
+    ViewData["Title"] = "Survey";
+}
+@section StyleSheet{
+    <link href="~/css/survey.css" rel="stylesheet" />
+}
+
+<h2>Survey</h2>
+
+<p>Please take a moment to fill out the survey below. Your input will help us provide you with the best experience possible.</p>
+
+<div>
+    
+    <form asp-controller="Home" asp-action="Survey" method="post">
+
+        <div>
+            <label class="survey-input" asp-for="ParkCode"></label>
+            <label class="survey-input" asp-for="EmailAddress"></label>
+            <label class="survey-input" asp-for="State"></label>
+            <label class="survey-input" asp-for="ActivityLevel"></label>
+            
+
+        </div>
+        <div class="grid-area-2">
+            <div>
+                <select class="survey-input" asp-for="ParkCode" asp-items="Model.SelectedPark"></select>
+                <span class="validation" asp-validation-for="ParkCode"></span>
+            </div>
+            <div>
+                <input class="survey-input" asp-for="EmailAddress" />
+                <span class="validation" asp-validation-for="EmailAddress"></span>
+            </div>
+            <div>
+                <select class="survey-input" asp-for="State" asp-items="Model.States"></select>
+                <span class="validation" asp-validation-for="State"></span>
+            </div>
+            <div id="survey-radio">
+                <label> <input type="radio" value="Inactive" name="ActivityLevel" />Inactive</label>
+                <label><input type="radio" value="Sedentary" name="ActivityLevel">Sedentary</label>
+                <label><input type="radio" value="Active" name="ActivityLevel" />Active</label>
+                <label><input type="radio" value="Extremely active" name="ActivityLevel" />Extremely active</label>
+                <span class="validation" asp-validation-for="ActivityLevel"></span>
+            </div>
+        </div>
+        <div></div>
+        <input id="survey-button" type="submit" value="Submit" />
+    </form>
+
+</div>
